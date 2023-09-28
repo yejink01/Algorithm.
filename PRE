@@ -1,0 +1,21 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        prefix = []
+        
+        def find_min(strs):
+            min_str = strs[0]
+            for s in strs:
+                if len(s) < len(min_str):
+                    min_str = s
+            return min_str
+
+        min_str = find_min(strs)
+        strs.remove(min_str)
+
+        for i in range(len(min_str)):
+            t = min_str[i]
+            for n in range(len(strs)-1):
+                if t != strs[n][i] or t != strs[n + 1][i]:
+                    return ''.join(prefix)
+            prefix.append(t)
+        return ''.join(prefix)
